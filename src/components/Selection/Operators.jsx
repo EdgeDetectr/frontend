@@ -8,11 +8,13 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import Container from "@mui/material/Container";
 
-export default function Operator() {
+export default function Operator({ onOperatorChange }) {
   const [operator, setOperator] = React.useState("");
 
   const handleChange = (event) => {
-    setOperator(event.target.value);
+    const value = event.target.value;
+    setOperator(value);
+    onOperatorChange(value);
   };
 
   const operators = ["sobel", "prewitt", "roberts"];
@@ -28,14 +30,14 @@ export default function Operator() {
               "&.Mui-focused": { color: "secondary.main" },
             }}
           >
-            operator
+            Operator
           </InputLabel>
         </Container>
         <Select
           labelId="demo-simple-select-label"
           id="demo-simple-select"
           value={operator}
-          label="operator"
+          label="Operator"
           onChange={handleChange}
           sx={{
             color: "primary.main",

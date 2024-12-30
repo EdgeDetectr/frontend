@@ -1,5 +1,6 @@
 "use client";
 
+import React, { useState } from "react";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import Operator from "./Selection/Operators";
@@ -9,6 +10,7 @@ import Grid from "@mui/material/Grid2";
 import "../styles/selection.css";
 
 export default function Selection() {
+  const [selectedOperator, setSelectedOperator] = useState("");
   return (
     <Box sx={{ flexGrow: 1 }}>
       <Grid
@@ -21,12 +23,12 @@ export default function Selection() {
         <Grid xs={12}>
           <Container maxWidth="sm" className="operator_container">
             <Typography variant="h5">select an operator</Typography>
-            <Operator />
+            <Operator onOperatorChange={setSelectedOperator} />
           </Container>
         </Grid>
         <Grid xs={12}>
           <Container maxWidth="sm" className="upload_container">
-            <Upload />
+            <Upload selectedOperator={selectedOperator} />
           </Container>
         </Grid>
       </Grid>
