@@ -8,8 +8,8 @@ import Fab from "@mui/material/Fab";
 import FileUploadIcon from "@mui/icons-material/FileUpload";
 import axios from "axios";
 
-export default function Upload({ selectedOperator }) {
-  const fileInputRef = useRef(null); // Ref to control file input
+export default function Upload({ selectedOperator, setImageUrls }) {
+  const fileInputRef = useRef(null);
 
   const handleUploadClick = () => {
     if (!selectedOperator) {
@@ -44,12 +44,12 @@ export default function Upload({ selectedOperator }) {
           headers: {
             "Content-Type": "multipart/form-data",
           },
-          responseType: "blob",
+          responseType: "text",
         }
       );
-      const { inputImage, outputImage } = response.data;
-      console.log("Input image: ", inputImage);
-      console.log("Output image: ", outputImage);
+      const responseData = JSON.parse(response.data);
+      const { inputImage, outputImage } = responseData;
+      setImageUrls({ inputImage: inputImage, outputImage: outputImage });
     } catch (error) {
       console.error("Error hitting the backend route: ", error);
     }

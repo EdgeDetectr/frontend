@@ -1,3 +1,6 @@
+"use client";
+
+import React, { useState } from "react";
 import { Container, Typography } from "@mui/material";
 import Grid from "@mui/material/Grid2";
 import Box from "@mui/material/Box";
@@ -7,6 +10,11 @@ import Selection from "../components/Selection";
 import Photos from "../components/Photos";
 
 export default function Home() {
+  const [imageUrls, setImageUrls] = useState({
+    inputImage: "",
+    outputImage: "",
+  });
+
   return (
     <Container
       sx={{
@@ -46,7 +54,7 @@ export default function Home() {
               height: "100%",
             }}
           >
-            <Selection />
+            <Selection setImageUrls={setImageUrls} />
           </Grid>
 
           <Grid
@@ -62,7 +70,10 @@ export default function Home() {
               height: "100%",
             }}
           >
-            <Photos />
+            <Photos
+              inputImage={imageUrls.inputImage}
+              outputImage={imageUrls.outputImage}
+            />
           </Grid>
         </Grid>
       </Box>

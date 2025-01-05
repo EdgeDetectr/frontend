@@ -9,7 +9,7 @@ import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid2";
 import "../styles/selection.css";
 
-export default function Selection() {
+export default function Selection({ setImageUrls }) {
   const [selectedOperator, setSelectedOperator] = useState("");
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -28,7 +28,10 @@ export default function Selection() {
         </Grid>
         <Grid xs={12}>
           <Container maxWidth="sm" className="upload_container">
-            <Upload selectedOperator={selectedOperator} />
+            <Upload
+              selectedOperator={selectedOperator}
+              setImageUrls={setImageUrls}
+            />
           </Container>
         </Grid>
       </Grid>
