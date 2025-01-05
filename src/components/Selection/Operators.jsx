@@ -17,7 +17,13 @@ export default function Operator({ onOperatorChange }) {
     onOperatorChange(value);
   };
 
-  const operators = ["sobel", "prewitt", "roberts"];
+  const operators = [
+    "opencv sobel",
+    "openmp sobel",
+    "alternative sobel",
+    "prewitt",
+    "roberts",
+  ];
 
   return (
     <Box sx={{ minWidth: 120 }}>

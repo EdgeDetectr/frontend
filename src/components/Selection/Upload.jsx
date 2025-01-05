@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useRef } from "react";
 import { Typography } from "@mui/material";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
@@ -9,16 +9,49 @@ import FileUploadIcon from "@mui/icons-material/FileUpload";
 import axios from "axios";
 
 export default function Upload({ selectedOperator }) {
-  const handleUpload = async () => {
+  const fileInputRef = useRef(null); // Ref to control file input
+
+  const handleUploadClick = () => {
     if (!selectedOperator) {
       alert("Please select an operator before uploading.");
       return;
     }
+
+    // Open the file selection dialog
+    fileInputRef.current.click();
+  };
+
+  const handleFileChange = async (event) => {
+    const selectedFile = event.target.files[0];
+    if (!selectedOperator) {
+      alert("Please select an operator before uploading.");
+      return;
+    }
+    if (!selectedFile) {
+      alert("Please select a file before uploading.");
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append("operator", selectedOperator);
+    formData.append("file", selectedFile);
+
     try {
-      const response = await axios.get("http://localhost:3001/api/operators");
-      console.log(response);
+      const response = await axios.post(
+        "http://localhost:3001/api/operators/" + selectedOperator,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+          responseType: "blob",
+        }
+      );
+      const { inputImage, outputImage } = response.data;
+      console.log("Input image: ", inputImage);
+      console.log("Output image: ", outputImage);
     } catch (error) {
-      console.error("Error hitting the backend route:", error);
+      console.error("Error hitting the backend route: ", error);
     }
   };
 
@@ -43,20 +76,28 @@ export default function Upload({ selectedOperator }) {
           textAlign: "center",
         }}
       >
+        {/* Hidden file input */}
+        <input
+          ref={fileInputRef}
+          id="upload-input"
+          type="file"
+          onChange={handleFileChange}
+          style={{ display: "none" }}
+        />
         <Fab
-          onClick={handleUpload}
           variant="extended"
           color="primary"
           sx={{ mb: 2 }}
+          onClick={handleUploadClick}
         >
           <FileUploadIcon sx={{ mr: 1 }} />
           Upload
         </Fab>
         <Typography variant="body2" sx={{ mb: 1 }}>
-          selected operator: {selectedOperator || "None"}
+          Selected operator: {selectedOperator || "None"}
         </Typography>
         <Typography variant="body2">
-          max size 100 mb. by proceeding, you agree to our
+          Max size 100 MB. By proceeding, you agree to our
           <a href="#"> terms of use</a>.
         </Typography>
       </Box>
