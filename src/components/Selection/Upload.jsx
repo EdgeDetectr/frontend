@@ -8,6 +8,7 @@ import Fab from "@mui/material/Fab";
 import FileUploadIcon from "@mui/icons-material/FileUpload";
 import axios from "axios";
 
+// Upload component that allows users to upload images that is sent to the backend and onwards.
 export default function Upload({ selectedOperator, setImageUrls }) {
   const fileInputRef = useRef(null);
 

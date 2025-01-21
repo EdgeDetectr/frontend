@@ -1,6 +1,7 @@
 import React from "react";
 import { Typography } from "@mui/material";
 
+// Heading component that displays the title and description of the application
 const Heading = () => {
   return (
     <div>

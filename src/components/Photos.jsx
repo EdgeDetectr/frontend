@@ -6,6 +6,7 @@ import { Typography } from "@mui/material";
 
 const backendUrl = "http://localhost:3001/uploads";
 
+// Photos component that is invisible unless upload is triggered, used to display the before and after images
 export default function Photos({ inputImage, outputImage }) {
   if (!inputImage && !outputImage) {
     return null;

@@ -8,6 +8,7 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import Container from "@mui/material/Container";
 
+// Operator component that displays the operator selection dropdown
 export default function Operator({ onOperatorChange }) {
   const [operator, setOperator] = React.useState("");
 
@@ -17,13 +18,7 @@ export default function Operator({ onOperatorChange }) {
     onOperatorChange(value);
   };
 
-  const operators = [
-    "opencv sobel",
-    "openmp sobel",
-    "alternative sobel",
-    "prewitt",
-    "roberts",
-  ];
+  const operators = ["opencv sobel", "alternative sobel", "openmp sobel"];
 
   return (
     <Box sx={{ minWidth: 120 }}>

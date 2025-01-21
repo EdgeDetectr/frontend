@@ -9,6 +9,7 @@ import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid2";
 import "../styles/selection.css";
 
+// Selection component that uses the Operator and Upload components to allow users to select an operator and upload images
 export default function Selection({ setImageUrls }) {
   const [selectedOperator, setSelectedOperator] = useState("");
   return (
